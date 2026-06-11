@@ -25,21 +25,23 @@ function App() {
 
   return (
     <WorkoutProvider>
-      <div className="bg-dark text-white min-vh-100" style={{ backgroundColor: '#121212' }}>
-        <Container fluid className="p-0">
-          <Row className="g-0">
-            {/* Sidebar Column: Spans full width (12) on mobile, but collapses to its normal width (2) on desktop (md) */}
-            <Col xs={12} md={3} lg={2}>
+      {/* 1. Added 'w-100' and custom color styling to ensure the entire window is dark */}
+      <div className="bg-dark text-white min-vh-100 w-100" style={{ backgroundColor: '#121212' }}>
+        {/* 2. CRITICAL: Enforce 'fluid' and clear 'p-0' padding/margins */}
+        <Container fluid className="p-0 m-0 w-100" style={{ overflowX: 'hidden' }}>
+          <Row className="g-0 min-vh-100">
+            {/* Sidebar Column */}
+            <Col xs={12} md={3} lg={2} className="h-100">
               <Sidebar currentTab={currentTab} setCurrentTab={setCurrentTab} />
             </Col>
             
-            {/* Main Content Workspace Column: Spans full width (12) on mobile/tablet, and takes center stage (7) on desktop (lg) */}
-            <Col xs={12} md={12} lg={7} className="p-4" style={{ background: '#181818' }}>
+            {/* Main Content Workspace Column */}
+            <Col xs={12} md={12} lg={7} className="p-4" style={{ background: '#181818', minHeight: '100vh' }}>
               {renderPage()}
             </Col>
             
-            {/* Rest Timer Column: Spans full width (12) on mobile/tablet, and settles into the right sidebar (3) on desktop (lg) */}
-            <Col xs={12} md={12} lg={3} className="p-4 border-start-lg border-secondary bg-black bg-opacity-20">
+            {/* Rest Timer Column */}
+            <Col xs={12} md={12} lg={3} className="p-4 bg-black bg-opacity-20" style={{ minHeight: '100vh' }}>
               <RestTimer />
             </Col>
           </Row>
